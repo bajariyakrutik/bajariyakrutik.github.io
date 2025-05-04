@@ -1449,9 +1449,11 @@
                     <div class="art-a art-card">
 
                       <!-- contact form -->
-                      <form id="form" class="art-contact-form">
+                      <form method="POST" id="form" class="art-contact-form">
                         <!-- form field -->
                         <div class="art-form-field">
+                          <!-- Replace with your Access Key -->
+                          <input type="hidden" name="access_key" value="cf517eb4-2abd-48b0-ad25-d57401d2fe82">
                           <!-- name input -->
                           <input id="name" name="name" class="art-input" type="text" placeholder="Name" required>
                           <!-- label -->
@@ -1478,7 +1480,7 @@
                         <div class="art-submit-frame">
                           <button class="art-btn art-btn-md art-submit" type="submit"><span>Send message</span></button>
                           <!-- success -->
-                          <div class="art-success">Success <i class="fas fa-check"></i></div>
+                          <div id="result" class="art-form-success"></div>
                         </div>
                       </form>
                       <!-- contact form end -->
@@ -1541,6 +1543,48 @@
   </div>
   <!-- app end -->
   <div id="swupMenu"></div>
+
+  <!-- Form submission script -->
+  <script>
+    const form = document.getElementById('form');
+    const result = document.getElementById('result');
+    
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+      result.innerHTML = "Please wait..."
+    
+        fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    result.innerHTML = "Mail sent successfully";
+                } else {
+                    console.log(response);
+                    result.innerHTML = json.message;
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                result.innerHTML = "Something went wrong!";
+            })
+            .then(function() {
+                form.reset();
+                setTimeout(() => {
+                    result.style.display = "none";
+                }, 3000);
+            });
+    });
+  </script>
 
   <!-- jquery js -->
   <script src="js/plugins/jquery.min.js"></script>
