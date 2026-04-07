@@ -1585,7 +1585,7 @@ content
   color: #fafafc;
 }
 .art-banner .art-banner-overlay .art-banner-photo {
-  width: 390px;
+  width: 510px;
   position: absolute;
   right: 30px;
   bottom: 0;
@@ -2526,7 +2526,7 @@ content (after 1600px)
     font-size: 42px;
   }
   .art-banner .art-banner-overlay .art-banner-photo {
-    width: 360px;
+    width: 470px;
   }
 }
 /* ------------------------------
@@ -2544,7 +2544,7 @@ content (after 1400px)
     font-size: 36px;
   }
   .art-banner .art-banner-overlay .art-banner-photo {
-    width: 320px;
+    width: 425px;
   }
 }
 /* ------------------------------
