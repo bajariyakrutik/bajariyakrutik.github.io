@@ -33,6 +33,33 @@ $(function() {
     continuousScrolling: true,
   });
 
+  function scrollMainContentToTop() {
+    var scrollContainer = document.querySelector('#scrollbar');
+    var scrollbar = scrollContainer ? Scrollbar.get(scrollContainer) : null;
+
+    if (scrollbar) {
+      scrollbar.scrollTo(0, 0, 600);
+      return;
+    }
+
+    if (scrollContainer) {
+      scrollContainer.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      return;
+    }
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  $(document).on('click', '#goTop', function() {
+    scrollMainContentToTop();
+  });
+
   // page loading
   $(document).ready(function() {
     anime({
